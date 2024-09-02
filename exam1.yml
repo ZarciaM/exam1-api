@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Examen1
+  version: 1.0.0
+servers:
+  - url: 'https://localhost.std23040.com'
+paths:
+  /Competitions:
+    get:
+      tags:
+        - Competitions
+      summary: Get all Competitions
+      operationId: getAllCompetitions
+      responses:
+        '200':
+          description: A list of Competitions
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Competition'
+    post:
+      summary: create competition
+      operationId: createCompetition
+      requestBody:
+        description: A list of competition
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateCompetition'
+      responses:
+        '200':
+          description: A list of comopetition
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: '#/components/schemas/Competition'   
+  components:
+  schemas:
+    Competition:
+      type: object
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+    CreateCompetition:
+      name:
+        type: string
+      country:
+        type: string      
+    Team:
+      type: object
+      properties:
+        name:
+          type: string
+        slogan:
+          type: string
+        PlayeurList:
+          type: array    
+        Competition:
+          type: object
+          properties:
+            reference:
+              type: string
+            meals:
+              type: array
+              items:
+                $ref: '#/components/schemas/Competition'    
